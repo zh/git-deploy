@@ -1,4 +1,4 @@
-#!/bin/bash -i
+#!/usr/bin/env bash
 set -e
 if [ "$GIT_DIR" = "." ]; then
   # The script has been called as a hook; chdir to the working copy
