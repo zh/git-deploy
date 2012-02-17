@@ -4,8 +4,11 @@ if [ "$GIT_DIR" = "." ]; then
   # The script has been called as a hook; chdir to the working copy
   cd ..
   GIT_DIR=.git
-  export GIT_DIR
+  HOOKS_DIR=.git/hooks
+  export GIT_DIR HOOKS_DIR
 fi
+
+[ -e ${HOOKS_DIR}/pre-receive ] && mv -f ${HOOKS_DIR}/pre-receive ${HOOKS_DIR}/pre-receive.sample
 
 # try to obtain the usual system PATH
 if [ -f /etc/profile ]; then

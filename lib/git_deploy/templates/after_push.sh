@@ -7,7 +7,7 @@ run() {
   [ -x $1 ] && $1 $oldrev $newrev
 }
 
-echo files changed: $(git diff $oldrev $newrev --diff-filter=ACDMR --name-only | wc -l)
+echo "-----> files changed: $(git diff $oldrev $newrev --diff-filter=ACDMR --name-only | wc -l)"
 
 umask 002
 

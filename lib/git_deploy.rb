@@ -47,10 +47,17 @@ class GitDeploy < Thor
   desc "hooks", "Installs git hooks to the remote repository"
   def hooks
     hooks_dir = File.join(LOCAL_DIR, 'hooks')
+    local_bin_dir = File.join(LOCAL_DIR, 'bin')
     remote_dir = "#{deploy_to}/.git/hooks"
+    remote_bin_dir = "#{deploy_to}/.git/bin"
 
     scp_upload "#{hooks_dir}/post-receive.sh" => "#{remote_dir}/post-receive"
-    run "chmod +x #{remote_dir}/post-receive"
+    scp_upload "#{hooks_dir}/pre-receive.sh" => "#{remote_dir}/pre-receive"
+    run "chmod +x #{remote_dir}/post-receive #{remote_dir}/pre-receive"
+    run "mkdir -p #{remote_bin_dir}"
+    scp_upload "#{local_bin_dir}/detect.sh" => "#{remote_bin_dir}/detect"
+    scp_upload "#{local_bin_dir}/compile.sh" => "#{remote_bin_dir}/compile"
+    run "chmod +x #{remote_bin_dir}/detect #{remote_bin_dir}/compile"
   end
   
   desc "restart", "Restarts the application on the server"
