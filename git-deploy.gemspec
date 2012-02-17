@@ -1,7 +1,7 @@
 # encoding: utf-8
 Gem::Specification.new do |gem|
   gem.name    = 'git-deploy'
-  gem.version = '5.2.1'
+  gem.version = '5.3'
   gem.executables = %w[ git-deploy ]
   
   gem.add_dependency 'thor'
