@@ -21,7 +21,7 @@ class GitDeploy < Thor
 
   desc "setup", "Create the remote git repository and install push hooks for it"
   method_option :shared, :aliases => '-g', :type => :boolean, :default => true
-  method_option :sudo, :aliases => '-s', :type => :boolean, :default => true
+  method_option :sudo, :aliases => '-s', :type => :boolean, :default => false
   def setup
     sudo = options.sudo? ? "#{sudo_cmd} " : ''
 
@@ -61,7 +61,11 @@ class GitDeploy < Thor
   desc "rollback", "Rolls back the checkout to before the last push"
   def rollback
     run "cd #{deploy_to} && git reset --hard ORIG_HEAD"
-    invoke :restart
+    if run_test("test -x #{deploy_to}/deploy/rollback")
+      run "cd #{deploy_to} && deploy/rollback | tee -a log/deploy.log"
+    else
+      invoke :restart
+    end
   end
 
   desc "log", "Shows the last part of the deploy log on the server"
