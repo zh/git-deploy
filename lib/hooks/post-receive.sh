@@ -47,7 +47,7 @@ if [ -z "${oldrev//0}" ]; then
   git submodule update --init | tee -a $logfile
 else
   # log timestamp
-  echo ==== $(date) ==== >> $logfile
+  echo "-----> ===[ $(date) ]===" >> $logfile
 
   # execute the deploy hook in background
   [ -x deploy/after_push ] && nohup deploy/after_push $oldrev $newrev 1>>$logfile 2>>$logfile &

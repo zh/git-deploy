@@ -35,4 +35,6 @@ do
   $BIN_DIR/compile $SCRATCH_DIR/$GIT_DIR_NAME $CACHE_DIR/$GIT_DIR_NAME
 done
 
+echo "ref: refs/heads/master" > $GIT_DIR/HEAD
+
 exit 0

@@ -3,6 +3,10 @@ set -e
 oldrev=$1
 newrev=$2
 
+indent() {
+  sed -u 's/^/       /'
+}
+
 run() {
   [ -x $1 ] && $1 $oldrev $newrev
 }
@@ -13,5 +17,5 @@ umask 002
 
 git submodule init && git submodule sync && git submodule update
 
-run deploy/before_restart
+run deploy/before_restart | indent
 run deploy/restart && run deploy/after_restart

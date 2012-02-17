@@ -11,8 +11,8 @@ echo "-----> Found config.ru"
 
 if [ -f $1/Gemfile ]; then
   if ! command -v bundle >/dev/null; then
-     echo "The rubygem 'bundler' is not installed. Installing it now." | indent
-     gem install bundler --pre
+    echo "-----> The rubygem 'bundler' is not installed. Installing it now."
+    sudo gem install bundler --pre | indent
   fi
 fi
 
