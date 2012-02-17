@@ -1,0 +1,8 @@
+*.orig
+*.rej
+*~
+*.log
+*.gem
+.DS_Store
+.idea
+.bundle
