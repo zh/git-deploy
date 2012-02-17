@@ -19,6 +19,10 @@ class GitDeploy::Generator < Thor::Group
     copy_hook 'before_restart.rb', 'deploy/before_restart'
   end
 
+  def copy_restart_after
+    copy_hook 'after_restart.sh', 'deploy/after_restart'
+  end
+
   private
 
   def copy_hook(template, destination)
